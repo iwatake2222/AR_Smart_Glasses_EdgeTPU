@@ -278,9 +278,12 @@ def func_controller_btn():
 
 		inp = btn2 << 2 | btn1 << 1 | btn0
 		# print(str(inp))
-		if inp == 7:
-			g_is_shutdown = True
-			g_is_exit = True
+		if inp == 6:
+			time.sleep(3)
+			if inp == 6:
+				g_is_shutdown = True
+				g_is_exit = True
+				os.system("sudo shutdown -h now")
 		elif inp == 1:
 			g_display_mode = 1
 		elif inp == 2:

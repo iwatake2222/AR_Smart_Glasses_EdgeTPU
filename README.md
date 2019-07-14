@@ -2,6 +2,10 @@
 
 This is a project to create AR smart glasses using Edge TPU and Raspberry Pi 3 (This is a joke toy, of course!).
 
+![pic01](00_doc/pic01.jpg) 
+![pic02](00_doc/pic02.jpg) 
+![pic03](00_doc/pic03.jpg) 
+![pic04](00_doc/pic04.jpg) 
 
 ## Hardware
 - Raspberry Pi 3 Model B+
@@ -44,6 +48,8 @@ This is a project to create AR smart glasses using Edge TPU and Raspberry Pi 3 (
 15: 
 ```
 
+![pic05](00_doc/pic05.jpg) 
+
 ## Software
 - smart_glasses.py
 	- main application
@@ -75,3 +81,18 @@ This is a project to create AR smart glasses using Edge TPU and Raspberry Pi 3 (
 - Run the script
 	- `sudo python3 smart_glasses.py`
 
+
+## Note
+- Need the following commands to use Edge TPU on Raspbian Buster (Python3.7)
+
+```
+cd /usr/local/lib/python3.7/dist-packages/edgetpu/swig/
+sudo ln -s _edgetpu_cpp_wrapper.cpython-35m-arm-linux-gnueabihf.so _edgetpu_cpp_wrapper.cpython-37m-arm-linux-gnueabihf.so
+```
+
+- To start the application automatically on boot
+
+```
+convvert CRLF to LF in autorun.sh and install.sh
+sudo sh ./install.sh
+```
