@@ -1,6 +1,12 @@
 # Home-built AR Smart Glasses using Edge TPU and Raspberry Pi
 
-This is a project to create AR smart glasses using Edge TPU and Raspberry Pi 3 (This is a joke toy, of course!).
+This is a project to create AR smart glasses using Edge TPU and Raspberry Pi 3 (This is a joke gadget, of course!).
+
+- Object detection (COCO 90 classes using MobileNet V2 SSD)
+- Display detection results:
+	- bounding boxes on liveview
+	- overlay icons on liveview
+	- icons only
 
 ![pic01](00_doc/pic01.jpg) 
 ![pic02](00_doc/pic02.jpg) 
@@ -8,27 +14,26 @@ This is a project to create AR smart glasses using Edge TPU and Raspberry Pi 3 (
 ![pic04](00_doc/pic04.jpg) 
 
 ## Hardware
-- Raspberry Pi 3 Model B+
+- Raspberry Pi 3 Model B+ (Raspbian Buster)
 - Pi Camera V2.1
 - Google Coral Edge TPU (USB Accelerator)
 - Full color OLED x 2
-	- 160 x 120
+	- 160 x 128
 	- NHD-1.69-160128UGC3
 	- SEPS525 controller
 - Others
-	- buttons
+	- Buttons
 	- FFC 1.0mm/15pin
-		- cable (the same as Pi Camera, which means I have lots of options for FFC cable)
-		- connector (下接点)
-		- breakout board (convert FFC to 2.54mm)
+		- Cable (the same as Pi Camera, which means I have lots of options for FFC cable)
+		- Connector (下接点)
+		- Breakout board (convert FFC to 2.54mm)
 
 ### Connection (Pi-Camera)
 - As always, just use FFC cable
 
-
 ### Connection (Pi-Display)
 - Make a small breakout board to convert Pi 40pin to FFC 15pin
-- Make another breakout board to mount two OLED and buttons
+- Make another breakout board to mount two OLEDs and buttons
 
 ```
 01: VDD
@@ -55,7 +60,7 @@ This is a project to create AR smart glasses using Edge TPU and Raspberry Pi 3 (
 	- main application
 	- generates five threads
 		- CAPTURE: to capture camera image using OpenCV (use GStreamer to decrease latency)
-			- send captured image to DETECTION AND DISPLAY thread
+			- send captured image to DETECTION and DISPLAY thread
 		- DETECTION: to detect objects using Edge TPU engine
 			- send detection results to DISPLAY
 		- DISPLAY: to display image to OLED using OLED_SEPS525_SPI_BGR565 module
@@ -75,7 +80,7 @@ This is a project to create AR smart glasses using Edge TPU and Raspberry Pi 3 (
 ## How to start
 - Install Edge TPU
 - Install OpenCV
-	- if you don't use GStreamer, need to modify VideoCapture part in smart_glasses.py
+	- if you don't use GStreamer, may need to modify VideoCapture part in smart_glasses.py
 - Get MobileNet V2 SSD model from Google Coral site
 	- `wget https://dl.google.com/coral/canned_models/mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite`
 - Run the script
@@ -90,7 +95,7 @@ cd /usr/local/lib/python3.7/dist-packages/edgetpu/swig/
 sudo ln -s _edgetpu_cpp_wrapper.cpython-35m-arm-linux-gnueabihf.so _edgetpu_cpp_wrapper.cpython-37m-arm-linux-gnueabihf.so
 ```
 
-- To start the application automatically on boot
+- To start the application automatically on boot. This scripts set cron configuration
 
 ```
 convvert CRLF to LF in autorun.sh and install.sh
