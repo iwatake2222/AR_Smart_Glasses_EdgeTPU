@@ -24,9 +24,7 @@ gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw, width=3280, height=2464
 '''
 
 # 速いけど画角狭い
-# なぜか一度'0'で開かないと、/dev/video0開くときにfreeze
-cap = cv2.VideoCapture(0)
-cap.release()
+# cap = cv2.VideoCapture(0)
 
 cap = cv2.VideoCapture("/dev/video0")
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)

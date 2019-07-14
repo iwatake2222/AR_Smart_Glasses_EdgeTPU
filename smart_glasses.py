@@ -28,10 +28,8 @@ g_display_mode = 1
 def func_capture(buff_cap2disp, lock_cap2disp, buff_cap2det, lock_cap2det):
 	global g_is_exit
 
-	# workaround: 一度'0'で開かないと、/dev/video0開くときにfreeze。原因不明
 	cap = cv2.VideoCapture(0)
 	cap.release()
-
 	cap = cv2.VideoCapture("/dev/video0")
 	cap.set(cv2.CAP_PROP_FRAME_WIDTH, CAPTURE_WIDTH)
 	cap.set(cv2.CAP_PROP_FRAME_HEIGHT, CAPTURE_HEIGHT)
@@ -68,6 +66,7 @@ def func_capture(buff_cap2disp, lock_cap2disp, buff_cap2det, lock_cap2det):
 			break
 		time_end = time.time()
 		# print ("Capture:{0}".format((time_end - time_start) * 1000) + "[msec]")
+	cap.release()
 	print("func_capture: exit")
 
 def cv2pil(image_cv):
@@ -111,7 +110,8 @@ def func_detection(buffer_cap2det, lock_cap2det, result_det2disp, lock_det2disp)
 				_ = result_det2disp.pop()
 			result_det2disp.append(results)
 			lock_det2disp.release()
-		
+		else:
+			time.sleep(0.001)
 		if g_is_exit == True:
 			break
 
@@ -183,7 +183,8 @@ def func_display(buffer_cap2disp, lock_cap2disp, result_det2disp, lock_det2disp)
 			# cv2.imshow('img', buff)
 			# if cv2.waitKey(1) & 0xFF == ord('q'):
 			 	# g_is_exit = True
-
+		else:
+			time.sleep(0.001)
 		if g_is_exit == True:
 			break
 		time_end = time.time()
